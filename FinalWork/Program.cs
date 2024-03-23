@@ -1,12 +1,29 @@
-﻿Console.WriteLine("Введите строчный массив где элементы разделены пробелом");
+﻿Console.WriteLine("Введите массив строк где элементы разделены пробелом");
 string[] arrayStr = Console.ReadLine().Split(new char[] { ' ', '\n', '\t' });
 
 string[] testArray = ["1234", "1567", "-2", "computer science"];
 
-PrintResultArray(ArrayConversion(arrayStr));
+int arraySize = DeterminingArraySize(testArray);
+
+PrintResultArray(ArrayConversion(testArray, arraySize));
 
 
-static string[] ArrayConversion(string[] array)
+static string[] ArrayConversion(string[] array, int size)
+{
+    string[] tmp = new string[size];
+    int tmpSize = 0;
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (array[i].Length <= 3)
+        {
+            tmp[tmpSize] = array[i];
+            tmpSize++;
+        }
+    }
+    return tmp;
+}
+
+static int DeterminingArraySize(string[] array)
 {
     int size = 0;
     for (int i = 0; i < array.Length; i++)
@@ -14,17 +31,7 @@ static string[] ArrayConversion(string[] array)
         {
             size++;
         }
-    string[] tmp = new string[size];
-    int tmpSize = 0;
-    for (int j = 0; j < array.Length; j++)
-    {
-        if (array[j].Length <= 3)
-        {
-            tmp[tmpSize] = array[j];
-            tmpSize++;
-        }
-    }
-    return tmp;
+    return size;
 }
 
 static void PrintResultArray(string[] array)
